@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alke-Wallet - Depositar</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { padding: 20px; background-color: #f8f9fa; }
+    .container { max-width: 400px; margin: 0 auto; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 class="text-center mb-4">Depositar</h2>
+    
+    <div class="alert alert-info text-center shadow-sm">
+        Saldo actual: <strong id="currentBalance" class="fs-5">$...</strong>
+    </div>
+
+    <div id="alert-container"></div>
+      
+    <div class="card p-4 shadow-sm bg-white">
+        <form id="depositForm">
+          <div class="mb-3">
+            <label for="depositAmount" class="form-label">Monto a depositar</label>
+            <input type="number" class="form-control form-control-lg" id="depositAmount" placeholder="Ej: 5000" min="1" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 btn-lg">Realizar depósito</button>
+        </form>
+    </div>
+
+    <div class="d-grid mt-3">
+      <a href="menu.html" class="btn btn-outline-secondary">Volver al Menú</a>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // $(document).ready: Aseguramos que el DOM esté listo antes de manipularlo
+    $(document).ready(function() {
+        
+        // --- PASO 1: MOSTRAR SALDO AL CARGAR ---
+        // JS Nativo: let saldo = localStorage.getItem(...)
+        let saldoActual = parseFloat(localStorage.getItem('walletBalance')) || 0;
+        
+        // Nota jQuery: .text() reemplaza a .innerText
+        // Uso $('#id').text(...) para actualizar el valor visualmente
+        $('#currentBalance').text('$' + saldoActual);
+
+        // --- PASO 2: PROCESAR EL DEPÓSITO ---
+        //.submit() maneja el evento de envío del formulario
+        $('#depositForm').submit(function(e) {
+            e.preventDefault(); // Evitamos recarga de página
+            
+            // Nota jQuery: .val() obtiene el valor del input (reemplaza a .value)
+            // Capturo el valor ingresado por el usuario
+            const monto = parseFloat($('#depositAmount').val());
+
+            if (monto > 0) {
+                // Lógica de Negocio (JS puro, entiendo que jQuery no se mete en cálculos matemáticos - Validar esto)
+                saldoActual += monto;
+                localStorage.setItem('walletBalance', saldoActual);
+
+                // Guardamos en historial (unshift agrega al principio del array)
+                let historial = JSON.parse(localStorage.getItem('walletTransactions')) || [];
+                historial.unshift({ 
+                    tipo: 'Depósito', 
+                    monto: monto, 
+                    fecha: new Date().toLocaleDateString() 
+                });
+                localStorage.setItem('walletTransactions', JSON.stringify(historial));
+
+                // --- PASO 3: FEEDBACK VISUAL CON JQUERY ---
+                // Construyo el HTML de la alerta de Bootstrap
+                const mensajeExito = `
+                    <div class="alert alert-success mt-3 text-center" role="alert">
+                        <h4 class="alert-heading">¡Éxito!</h4>
+                        <p>Has depositado <strong>$${monto}</strong>.</p>
+                        <hr>
+                        <p class="mb-0">Nuevo saldo: <strong>$${saldoActual}</strong></p>
+                        <small class="text-muted">Volviendo al menú...</small>
+                    </div>`;
+                
+                // Efecto visual: .slideDown()
+                // Primero inyecto el HTML (.html), lo oculto (.hide) y luego lo deslizo (.slideDown)
+                $('#alert-container').html(mensajeExito).hide().slideDown();
+
+                // Se limpia el input visualmente
+                $('#depositAmount').val('');
+
+                // Redirección automática tras 2 segundos
+                setTimeout(function() {
+                    window.location.href = 'menu.html';
+                }, 2000);
+            }
+        });
+    });
+  </script>
+</body>
+</html>
