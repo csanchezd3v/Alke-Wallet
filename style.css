@@ -1,6 +1,21 @@
-/* Estilos CSS */
+:root {
+    /* --- Paleta blanca y azul --- */
+    --color-fondo: #f8fafc;       /* Gris muy muy claro (casi blanco) */
+    
+    /* Tarjeta blanca sólida (No transparente, estilo app móvil) */
+    --color-tarjeta: #ffffff;     
+    
+    --color-texto: #1e293b;       /* Azul grisáceo oscuro (Texto principal) */
+    --color-texto-suave: #64748b; /* Gris medio (Texto secundario) */
+    
+    --color-primario: #3b82f6;    /* Azul Royal brillante */
+    --color-hover: #2563eb;       /* Azul más intenso */
+}
+
+/* 1. Fondo Limpio */
 body {
-    background: linear-gradient(135deg, #5e93d4 0%, #98a1b2 100%);
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-height: 100vh;
     display: flex;
@@ -13,30 +28,92 @@ body {
     padding-bottom: 20px;
 }
 
-/* Tarjetas con efecto de elevación */
-.card {
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    background-color: rgba(123, 171, 194, 0.95);
+/* 2. Tarjetas blancas estilo app */
+.card, .list-group-item {
+    background-color: var(--color-tarjeta);
+    border: none; /* Sin bordes, solo sombra */
+    color: var(--color-texto);
+    /* Sombra suave y difusa (Elevation) */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    border-radius: 0px; /* Bordes muy redondeados */
 }
 
-/* Botones personalizados */
+/* 3. Inputs (Campos de texto) - Grises suaves */
+.form-control, .form-select {
+    background-color: #d2d9e0; /* Gris muy suave */
+    border: 1px solid transparent; /* Sin borde visible al inicio */
+    color: var(--color-texto) !important;
+    border-radius: 12px;
+    padding: 12px; /* Más espacio interno */
+}
+
+.form-control::placeholder {
+    color: #94a3b8;
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: #ffffff;
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+/* 4. Botones con Degradado Azul */
 .btn-primary {
-    background-color: #597a84;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
     border: none;
-    font-weight: bold;
-    color: #003b5c;
+    font-weight: 600;
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
 }
 
 .btn-primary:hover {
-    background-color: #0099bb;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
+}
+
+/* Botones secundarios */
+.btn-outline-primary {
+    color: var(--color-primario);
+    border: 2px solid var(--color-primario);
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--color-primario);
     color: white;
 }
 
-/* Títulos */
-h2 {
-    color: white;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    font-weight: 700;
+.btn-secondary, .btn-outline-secondary {
+    color: var(--color-texto-suave);
+    background-color: transparent;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
 }
+
+.btn-secondary:hover {
+    background-color: #f1f5f9;
+    color: var(--color-texto);
+}
+
+/* 5. Títulos y Textos */
+h2, h3, h5 {
+    color: #0f172a; /* Casi negro */
+    font-weight: 800; /* Letra muy gruesa */
+    letter-spacing: -0.5px;
+}
+
+.text-muted {
+    color: var(--color-texto-suave) !important;
+}
+
+/* Ajuste lista */
+.list-group-item {
+    border-bottom: 1px solid #f1f5f9; /* Línea separadora muy suave */
+}
+
+/* Dinero */
+.text-success { color: #10b981 !important; } /* Verde esmeralda */
+.text-danger { color: #ef4444 !important; } /* Rojo */
