@@ -1,0 +1,42 @@
+/* Estilos CSS */
+body {
+    background: linear-gradient(135deg, #5e93d4 0%, #98a1b2 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Tarjetas con efecto de elevación */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    background-color: rgba(123, 171, 194, 0.95);
+}
+
+/* Botones personalizados */
+.btn-primary {
+    background-color: #597a84;
+    border: none;
+    font-weight: bold;
+    color: #003b5c;
+}
+
+.btn-primary:hover {
+    background-color: #0099bb;
+    color: white;
+}
+
+/* Títulos */
+h2 {
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    font-weight: 700;
+}
