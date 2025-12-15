@@ -61,7 +61,7 @@
             const monto = parseFloat($('#depositAmount').val());
 
             if (monto > 0) {
-                // Lógica de Negocio (JS puro, entiendo que jQuery no se mete en cálculos matemáticos - Validar esto)
+                // Lógica de Negocio (JS puro)
                 saldoActual += monto;
                 localStorage.setItem('walletBalance', saldoActual);
 

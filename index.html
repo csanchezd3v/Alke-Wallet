@@ -3,96 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alke-Wallet - Login</title>
+  <title>Bienvenido a Alke Wallet</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    body { padding: 20px; background-color: #f8f9fa; }
-    .login-container { max-width: 400px; margin: 60px auto; }
+    /* Centrado total para la portada */
+    body, html { height: 100%; }
+    body { display: flex; align-items: center; justify-content: center; background-color: #f8fafc; }
+    .welcome-card { max-width: 400px; text-align: center; border: none; }
+    .logo-placeholder { font-size: 3rem; margin-bottom: 20px; }
   </style>
 </head>
 <body>
-  
-  <div class="login-container">
-    <h2 class="text-center mb-4">Inicio de sesión</h2>
 
-    <div id="alert-container"></div>
-
-    <form id="loginForm">
-      <div class="mb-3">
-        <label for="email" class="form-label">Email (Usuario)</label>
-        <input type="text" class="form-control" id="email" placeholder="admin" required>
-      </div>
-
-      <div class="mb-3">
-        <label for="password" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="password" placeholder="1234" required>
-      </div>
-
-      <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
-    </form>
+  <div class="card welcome-card p-5 shadow-sm">
+    <div class="logo-placeholder">💰</div>
+    <h1 class="mb-3 fw-bold">Alke Wallet</h1>
+    <p class="text-muted mb-4">La billetera digital segura y confiable para tus activos.</p>
+    
+    <a href="login.html" class="btn btn-primary btn-lg w-100">Ingresar</a>
+    
+    <div class="mt-4">
+      <small class="text-muted">Bootcamp Desarrollo FullStack Python 2025</small><br>
+      <small class="text-muted">Desarrollado por Carlos Sánchez</small>
+    </div>
   </div>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    // Nota jQuery: $(document).ready() asegura que el HTML cargó antes de ejecutar lógica (Pregunta de clases)
-    $(document).ready(function() {
-        
-        // CAMBIO: Reemplazo .addEventListener('submit') por la función .submit() de jQuery
-        $('#loginForm').submit(function(e) {
-            
-            // Prevenir el recargo de página (igual que en JS nativo)
-            e.preventDefault(); 
-
-            // Cambio: Uso selectores $('#id') y .val() para obtener datos
-            // Es más corto que document.getElementById('...').value
-            const user = $('#email').val();
-            const pass = $('#password').val();
-
-            // Validación simple (Simulada)
-            if (user === 'admin' && pass === '1234') {
-                
-                // Lógica de LocalStorage (Se mantiene igual, jQuery no reemplaza esto)
-                if (!localStorage.getItem('walletBalance')) {
-                    localStorage.setItem('walletBalance', 60000);
-                    localStorage.setItem('walletTransactions', JSON.stringify([]));
-                }
-
-                // Cambio visual: Creo una alerta Bootstrap de éxito como string de HTML
-                // Esto reemplaza al alert() nativo para mejor UX
-                const successAlert = '<div class="alert alert-success">¡Bienvenido! Redirigiendo...</div>';
-                
-                // Nota jQuery: .html() inyecta el código dentro del div contenedor
-                // .hide() y .fadeIn() crean una animación suave de aparición
-                $('#alert-container').html(successAlert).hide().fadeIn();
-
-                // Redirección con pequeño retraso para que el usuario lea el mensaje
-                setTimeout(function(){
-                    window.location.href = 'menu.html';
-                }, 1000);
-
-            } else {
-                // Cambio visual: Alerta de error dinámica
-                const errorAlert = '<div class="alert alert-danger">Credenciales incorrectas. Intenta de nuevo.</div>';
-                
-                // Metemos la alerta en el contenedor
-                $('#alert-container').html(errorAlert).hide().fadeIn();
-                
-                // Modificación extra: Cambia el borde a rojo usando .css()
-                $('#email, #password').css('border', '1px solid red');
-            }
-        });
-
-        // Nota jQuery: Evento para limpiar el borde rojo cuando el usuario escribe
-        // Uso 'input' o 'keydown' con el selector múltiple $('#email, #password')
-        $('#email, #password').on('input', function() {
-             // $(this) se refiere al elemento que disparó el evento.
-             $(this).css('border', '1px solid #ced4da');
-        });
-    });
-  </script>
 </body>
 </html>

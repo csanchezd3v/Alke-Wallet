@@ -8,7 +8,7 @@
     --color-texto: #1e293b;       /* Azul grisáceo oscuro (Texto principal) */
     --color-texto-suave: #64748b; /* Gris medio (Texto secundario) */
     
-    --color-primario: #3b82f6;    /* Azul Royal brillante */
+    --color-primario: #3b82f6;    /* Azul royal brillante */
     --color-hover: #2563eb;       /* Azul más intenso */
 }
 
@@ -57,7 +57,7 @@ body {
     box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
 }
 
-/* 4. Botones con Degradado Azul */
+/* 4. Botones con degradado azul */
 .btn-primary {
     background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
     border: none;
@@ -101,7 +101,7 @@ body {
 /* 5. Títulos y Textos */
 h2, h3, h5 {
     color: #0f172a; /* Casi negro */
-    font-weight: 800; /* Letra muy gruesa */
+    font-weight: 700; /* Letra semi "gruesa" */
     letter-spacing: -0.5px;
 }
 

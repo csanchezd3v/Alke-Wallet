@@ -35,7 +35,7 @@
   <script>
     $(document).ready(function() {
         // 1. OBTENER DATOS
-        // Leemos el array guardado en LocalStorage. Si no hay nada, usamos array vacío [].
+        // Leemos el array guardado en LocalStorage. Si no hay nada, usamos array vacío []
         const historial = JSON.parse(localStorage.getItem('walletTransactions')) || [];
 
         // 2. FUNCIÓN DE RENDERIZADO (Dibuja la lista según un filtro)
@@ -65,7 +65,7 @@
                     const colorClass = mov.monto > 0 ? 'text-success' : 'text-danger';
                     const signo = mov.monto > 0 ? '+' : ''; // Agregamos signo + solo si es positivo
 
-                    // Construimos el HTML como un String (Template Literal)
+                    // Construimos el HTML como un String (Template literal)
                     const htmlItem = `
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <div>
